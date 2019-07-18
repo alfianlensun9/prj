@@ -30,6 +30,11 @@ class C_actions extends CI_Controller{
         echo json_encode($this->pesanan->createMasterBarang());
     }
 
+    public function createMasterJurusan()
+    {
+        echo json_encode($this->pesanan->createMasterJurusan());
+    }
+
     public function createPesanan()
     {
         echo json_encode($this->pesanan->createPesanan());
@@ -43,6 +48,16 @@ class C_actions extends CI_Controller{
     public function hapusPesanan()
     {
         echo json_encode($this->pesanan->hapusPesanan());
+    }
+
+    public function hapusMasterBarang()
+    {
+        echo json_encode($this->pesanan->hapusMasterBarang());
+    }
+
+    public function hapusMasterJurusan()
+    {
+        echo json_encode($this->pesanan->hapusMasterJurusan());
     }
 
     public function kirimPesanan()

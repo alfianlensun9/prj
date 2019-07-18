@@ -24,13 +24,26 @@
                 <thead>
                     <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Nama Barang</th>                    
+                    <th scope="col">Nama Barang</th>  
+                    <th>Opsi</th>                  
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="2">Tidak Ada Barang</td>
-                    </tr>
+                    <?php if ($dataMasterBarang == null) :  ?>
+                        <tr>
+                            <td colspan="3">Tidak Ada Barang</td>
+                        </tr>
+                    <?php endif ?>
+                    <?php 
+                    $no = 1;
+                    foreach ($dataMasterBarang as $dt): ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $dt['nm_barang'] ?></td>
+                            <td><button class="btn btn-sm btn-danger" onclick = "return deleteMasterBarang('<?= $dt['id_mst_barang'] ?>')">Hapus</button></td>
+                        </tr>
+                    <?php endforeach ?>
+                    
                 </tbody>
             </table>
             </div>
@@ -40,6 +53,24 @@
 
 <script>
 (function(){
+
+    deleteMasterBarang = (id) => {
+        $.ajax({
+            url : base_url+'hapusMasterBarang',
+            method : 'post',
+            data : {
+                id : id
+            },
+            dataType : 'json',
+            success : function (data){
+                $('#content-wrapper').load(base_url+'masterBarang')
+            },
+            error : function (err){
+                console.log(err)
+            }
+        })
+    }
+
     $(document).unbind().on('click', '#createMasterBarang', function(){
         $.ajax({
             url : base_url+'createMasterBarang',
@@ -47,7 +78,7 @@
             data : $('#form-masterBarang').serialize(),
             dataType : 'json',
             success : function (data){
-                console.log(data)
+                $('#content-wrapper').load(base_url+'masterBarang')
             },
             error : function (err){
                 console.log(err)

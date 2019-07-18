@@ -36,6 +36,7 @@
             </div>
         </div>
         <?php endif ?>
+        <?php if ($role == 2) :  ?>
         <div class="col-lg-12 cardSideBar" id="nav-masterbarang">
             <div class="form-row">
                 <div class="col-lg-2">
@@ -66,6 +67,7 @@
                 </div>                        
             </div>
         </div>
+        <?php endif ?>
     </div>
 </div>        
 
@@ -106,19 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }    
 
-    masterbarang.addEventListener('click' , () => {
-        loadView('masterBarang','Master Barang','nav-masterbarang')
-    })
+    if (masterbarang){
+        masterbarang.addEventListener('click' , () => {
+            loadView('masterBarang','Master Barang','nav-masterbarang')
+        })
+    }
 
-
-    masterjurusan.addEventListener('click' , () => {        
-        loadView('masterJurusan','Master Jurusan','nav-masterjurusan')
-    })
-
-    otentikasi.addEventListener('click', () => {
-        loadView('otentikasi', 'Otentikasi','nav-otentikasi')
-    })   
-    
+    if (masterjurusan){
+        masterjurusan.addEventListener('click' , () => {        
+            loadView('masterJurusan','Master Jurusan','nav-masterjurusan')
+        })
+    }
+    if (otentikasi){
+        otentikasi.addEventListener('click', () => {
+            loadView('otentikasi', 'Otentikasi','nav-otentikasi')
+        })   
+    }
         
 })    
 </script>

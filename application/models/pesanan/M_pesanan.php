@@ -38,6 +38,30 @@ class M_pesanan extends CI_Model{
                         ->get('trx_rincian_harga')->row_array(0);
     }
 
+    public function getMasterBarang()
+    {
+        return $this->db->where('flag_active', 1)
+                        ->get('mst_barang')->result_array();
+    }
+
+    public function hapusMasterBarang()
+    {
+        return $this->db->where('id_mst_barang', $this->input->post('id'))
+                        ->update('mst_barang',['flag_active' => 0]);
+    }
+
+    public function hapusMasterjurusan()
+    {
+        return $this->db->where('id_mst_jurusan', $this->input->post('id'))
+                        ->update('mst_jurusan',['flag_active' => 0]);
+    }
+
+    public function getMasterJurusan()
+    {
+        return $this->db->where('flag_active', 1)
+                        ->get('mst_jurusan')->result_array();
+    }
+
     public function createMasterBarang()
     {        
         $this->db->insert('mst_barang', $this->input->post());         

@@ -79,12 +79,14 @@ class C_view extends CI_Controller{
 
     public function masterBarang()
     {
-        $this->load->view('master/barang');
+        $data['dataMasterBarang'] = $this->pesanan->getMasterBarang();
+        $this->load->view('master/barang', $data);
     }
 
     public function masterJurusan()
     {
-        $this->load->view('master/jurusan');
+        $data['dataMasterJurusan'] = $this->pesanan->getMasterJurusan();
+        $this->load->view('master/jurusan', $data);
     }
 
     public function otentikasi()
