@@ -28,7 +28,11 @@
                                         <button class="btn btn-sm btn-warning" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Menunggu Konfirmasi</button>
                                     <?php elseif($dt['id_mst_status_order'] == 2 && $role == 2) : ?>
                                         <button class="btn btn-sm btn-success" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Telah Ada Rincian</button>
+                                        <?php if ($dt['id_trx_purcase_order'] == null) : ?>
                                         <button class="btn btn-sm btn-primary" onclick="return openPurcaseOrder('<?= $dt['id_trx_order_barang'] ?>')">Buat Purcase Order</button>
+                                        <?php else : ?>
+                                        <button class="btn btn-sm btn-success" onclick="return openPurcaseOrder('<?= $dt['id_trx_order_barang'] ?>')">Lihat Purcase Order</button>
+                                        <?php endif ?>
                                     <?php else: ?>
                                         <button class="btn btn-sm btn-primary" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Lihat Detail</button>                
                                     <?php endif ?>

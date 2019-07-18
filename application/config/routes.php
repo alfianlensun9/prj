@@ -25,10 +25,11 @@ $route['createMasterBarang'] = $actControllerUri.'createMasterBarang';
 $route['createMasterJurusan'] = $actControllerUri.'createMasterJurusan';
 $route['createPesanan'] = $actControllerUri.'createPesanan';
 $route['createPesananDetail'] = $actControllerUri.'createPesananDetail';
+$route['createPurcaseOrder/(:any)'] = $actControllerUri.'createPurcaseOrder/$1';
 $route['hapusPesanan'] = $actControllerUri.'hapusPesanan';
 $route['hapusMasterBarang'] = $actControllerUri.'hapusMasterBarang';
 $route['hapusMasterJurusan'] = $actControllerUri.'hapusMasterJurusan';
 $route['kirimPesanan'] = $actControllerUri.'kirimPesanan';
 $route['createRincianPesanan']  = $actControllerUri.'createRincianPesanan';
 $route['konfirmasiRincianPesanan']  = $actControllerUri.'konfirmasiRincianPesanan';
-
+$route['konfirmasiPurcaseOrder/(:any)'] = $actControllerUri.'konfirmasiPurcaseOrder/$1';

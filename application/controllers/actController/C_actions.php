@@ -45,6 +45,16 @@ class C_actions extends CI_Controller{
         echo json_encode($this->pesanan->createPesananDetail());
     }
 
+    public function createPurcaseOrder($id)
+    {
+        echo json_encode($this->pesanan->createPurcaseOrder($id));
+    }
+
+    public function konfirmasiPurcaseOrder($id)
+    {
+        echo json_encode($this->pesanan->konfirmasiPurcaseOrder($id));
+    }
+
     public function hapusPesanan()
     {
         echo json_encode($this->pesanan->hapusPesanan());

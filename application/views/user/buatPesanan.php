@@ -47,6 +47,8 @@
                                         <button class="btn btn-sm btn-primary" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Tambah Detail</button>
                                     <?php elseif($dt['id_mst_status_order'] == 1) : ?>
                                         <button class="btn btn-sm btn-warning" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Menunggu Konfirmasi</button>
+                                    <?php elseif($dt['id_mst_status_order'] == 3) : ?>
+                                        <button class="btn btn-sm btn-info" onclick="return openPurcaseOrder('<?= $dt['id_trx_order_barang'] ?>')">Konfirmasi Purcase Order</button>
                                     <?php endif ?>
                                 </td>                                
                             </tr>
@@ -88,6 +90,10 @@
 
     openDetailPesanan = (id) => {
         $('#content-wrapper').load(base_url+'orderBarangDetail/'+id)
+    }
+    
+    openPurcaseOrder = (id) => {
+        $('#content-wrapper').load(base_url+'purcaseOrder/'+id)
     }
     
 }())

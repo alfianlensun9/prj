@@ -19,11 +19,11 @@ class M_pesanan extends CI_Model{
         $dataOrder = $this->db->where('id_trx_order_barang', $id)
                                 ->get('trx_order_barang')->row_array(0);
         if ($postatus == 1){
-            $this->db->join('trx_rincian_harga', 'trx_rincian_harga.id_trx_order_barang_detail = trx_order_barang_detail.id_trx_order_barang_detail');
+            $this->db->join('trx_rincian_harga as b', 'b.id_trx_order_barang_detail = a.id_trx_order_barang_detail');
         }
-        $this->db->where('flag_active', 1);
+        $this->db->where('a.flag_active', 1);
         $dataOrderDetail = $this->db->where('id_trx_order_barang', $id)
-                                    ->get('trx_order_barang_detail')->result_array();
+                                    ->get('trx_order_barang_detail as a')->result_array();
         return [
             'dataOrder' => $dataOrder,
             'detailOrder' => $dataOrderDetail
@@ -35,6 +35,17 @@ class M_pesanan extends CI_Model{
         return $this->db->where('id_trx_order_barang_detail', $this->input->post('id'))
                         ->where('flag_active', 1)
                         ->order_by('id_trx_rincian_harga', 'desc')
+                        ->get('trx_rincian_harga')->row_array(0);
+    }
+
+    public function getPurcaseOrder($id)
+    {
+        return $this->db->select('*')
+                        ->from('trx_order_barang as a')
+                        ->join('trx_purcase_order as b', 'a.id_trx_purcase_order = b.id_trx_purcase_order')
+                        ->join('mst_jurusan as c' , 'b.id_tujuan_order = c.id_mst_jurusan')
+                        ->where('id_trx_order_barang', $id)                        
+                        ->where('b.flag_active', 1)                        
                         ->get('trx_rincian_harga')->row_array(0);
     }
 
@@ -111,6 +122,40 @@ class M_pesanan extends CI_Model{
             'result' => $this->db->where('id_trx_order_barang', $this->input->post('id_trx_order_barang'))
                                 ->where('flag_active', 1)
                                 ->get('trx_order_barang_detail')->result_array()
+        ];
+    }
+
+    public function createPurcaseOrder($id)
+    {
+        $this->db->insert('trx_purcase_order', $this->input->post());                
+        $this->db->where('id_trx_order_barang', $id);
+        $this->db->update('trx_order_barang', [
+            'id_trx_purcase_order' => $this->db->insert_id(),
+            'id_mst_status_order' => 3
+        ]);                
+        return [
+            'metaData' => [
+                'code' => 200,
+                'message' => 'ok'
+            ],
+            'result' => $this->db->where('id_trx_order_barang', $this->input->post('id_trx_order_barang'))
+                                ->where('flag_active', 1)
+                                ->get('trx_order_barang_detail')->result_array()
+        ];
+    }
+
+    public function konfirmasiPurcaseOrder($id)
+    {
+        $this->db->where('id_trx_purcase_order', $id);
+        $this->db->update('trx_purcase_order', [
+                'flag_status_purcase_order' => $this->input->post('ev')
+            ]);                
+        return [
+            'metaData' => [
+                'code' => 200,
+                'message' => 'ok'
+            ],
+            'result' => null
         ];
     }
 

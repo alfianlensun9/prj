@@ -11,16 +11,21 @@
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
         
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-default"
-            aria-labelledby="navbarDropdownMenuLink-333">
-            <a class="dropdown-item" href="#"><?= $this->session->userdata('username') ?></a>
-            <a class="dropdown-item" href="<?= base_url('logout') ?>">Keluar</a>            
-            </div>
+        <li class="nav-item">
+            <a
+                style="
+                    margin-right : 20%
+                "
+            >
+                <strong><?= $this->session->userdata('username') ?></strong>
+            </a>            
+        </li>
+        <li class="nav-item" style="padding-left : 40">
+            <a 
+            style="
+                    margin-right : 200
+                "
+            href="<?= base_url('logout') ?>"><i class="fa fa-arrow-right"></i></a>            
         </li>
         </ul>
     </div>

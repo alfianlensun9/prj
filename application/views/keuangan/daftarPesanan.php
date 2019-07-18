@@ -26,8 +26,8 @@
                                         <button class="btn btn-sm btn-primary" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Lihat Detail</button>
                                     <?php elseif($dt['id_mst_status_order'] == 1) : ?>
                                         <button class="btn btn-sm btn-warning" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Menunggu Konfirmasi</button>
-                                    <?php elseif($dt['id_mst_status_order'] == 2) : ?>
-                                        <button class="btn btn-sm btn-success" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Telah Ada Rincian</button>
+                                    <?php elseif($dt['id_mst_status_order'] == 2 || $dt['id_mst_status_order'] == 3) : ?>
+                                        <button class="btn btn-sm btn-success" onclick="return openDetailPesanan('<?= $dt['id_trx_order_barang'] ?>')">Telah Ada Rincian</button>                                    
                                     <?php endif ?>
                                 </td>                                
                             </tr>

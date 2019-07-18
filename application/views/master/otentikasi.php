@@ -7,7 +7,7 @@
         <div class="form-row pt-3">
             <div class="form-group col-8">
                 <label for="">Nama User</label>
-                <input type="text" name="username" class="form-control form-control-sm">
+                <input type="text" name="username" id="username" class="form-control form-control-sm">
             </div>
             <div class="form-group col-4">
                 <label for="">Role</label>
@@ -19,11 +19,11 @@
             </div>
             <div class="form-group col-8">
                 <label for="">Kata Sandi</label>
-                <input type="password" name="password" id="pass" class="form-control form-control-sm">
+                <input type="password" onkeyup="return cekPass()" name="password" id="pass" class="form-control form-control-sm">
             </div>
             <div class="form-group col-8">
                 <label for="">Konfirmasi Kata Sandi</label>
-                <input type="password" id="passcek" class="form-control form-control-sm">
+                <input type="password" onkeyup="return cekPass()" id="passcek" class="form-control form-control-sm">
             </div>
             <div class="col-lg-2 pt-4 mt-2">
             <span class="badge badge-warning" style="display : none" id="labelveriftc">Tidak Cocok</span>
@@ -65,8 +65,8 @@
 </div>
 
 <script>
-    (function(){
-        $(document).on('keyup', '#passcek, #pass', function(){
+    (function(){        
+        cekPass = () => {
             if ($('#passcek').val() != $('#pass').val() && $('#passcek').val() != ''){
                 $('#labelveriftc').show()
                 $('#labelverifc').hide()
@@ -76,22 +76,26 @@
                 $('#labelverifc').show()
                 $('#labelveriftc').hide()
             }
-        })
+        }        
 
         $(document).unbind().on('click', '#buatAkun', function (e){
             e.stopPropagation()
-            $.ajax({
-                url : base_url+'createAkun',
-                method : 'post',
-                data : $('#form-tambahuser').serialize(),
-                dataType : 'json',
-                success : function (data){
-                    $('#content-wrapper').load(base_url+'otentikasi')                
-                },
-                error : function (err){
-                    console.log(err)
-                }
-            })
+            if ($('#passcek').val() == $('#pass').val() && $('#username').val() != ''){
+                $.ajax({
+                    url : base_url+'createAkun',
+                    method : 'post',
+                    data : $('#form-tambahuser').serialize(),
+                    dataType : 'json',
+                    success : function (data){
+                        $('#content-wrapper').load(base_url+'otentikasi')                
+                    },
+                    error : function (err){
+                        console.log(err)
+                    }
+                })
+            } else {
+                Alert('Lengkapi Data Dengan Benar')
+            }
         })
     }())
 

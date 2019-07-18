@@ -30,9 +30,9 @@ class C_view extends CI_Controller{
 
     public function orderBarang()
     {
-        $data['role'] = $this->role;        
+        $data['role'] = $this->role;                
 
-        $data['datapesanan'] = $this->pesanan->getPesanan($this->role != 1 ? [1,2] : []);
+        $data['datapesanan'] = $this->pesanan->getPesanan($this->role != 1 ? [1,2,3] : []);        
         if ($this->role == 1){
             $this->load->view('user/buatPesanan', $data);
         }
@@ -68,9 +68,14 @@ class C_view extends CI_Controller{
 
     public function purcaseOrder($id)
     {
-        $getData = $this->pesanan->getPesananDetail($id, 1);                
+        $getData = $this->pesanan->getPesananDetail($id, 1);      
+        $getPurcaseOrder =  $this->pesanan->getPurcaseOrder($id);
+        if ($getPurcaseOrder != null){
+            $data['datapurcaseorder'] = $getPurcaseOrder;
+        }
         $data['datapesanan'] = $getData['dataOrder'];
         $data['datapesanandetail'] = $getData['detailOrder'];        
+        $data['masterJurusan'] = $this->pesanan->getMasterJurusan();
         // $this->load->view('user/buatPesananDetail', $data); *user
         // $this->load->view('keuangan/daftarPesananDetail', $data); * keu
         $this->load->view('admin/purcaseOrder', $data);
