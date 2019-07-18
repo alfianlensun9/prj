@@ -70,17 +70,7 @@
             data : $('#formPesanan').serialize(),
             dataType : 'json',
             success : (data) => {
-                $('#tbody-pesanan').html('')
-                let no = 1;
-                $.each(data.result, (i, item) => {
-                    $('#tbody-pesanan').append(
-                        '<tr>'+
-                            '<td>'+(no++)+'</td>'+
-                            '<td>'+item.tanggal_order+'</td>'+
-                            `<td><button class="btn btn-sm btn-primary" onclick="return openDetailPesanan('${item.id_trx_order_barang}')">Tambah Detail</button></td>`+
-                        '</tr>'
-                    );
-                })
+                $('#content-wrapper').load(base_url+'orderBarang')        
             },
             error : (err) => {
                 console.log(err)

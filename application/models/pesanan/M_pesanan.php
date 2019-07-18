@@ -5,7 +5,9 @@ class M_pesanan extends CI_Model{
     public function getPesanan($status = [])
     {
         if ($status != []){
-            $this->db->where_in('id_mst_status_order', $status);
+            $this->db->where_in('id_mst_status_order', $status);                        
+        } else {
+            $this->db->where('id_user_inputer', $this->session->userdata('idUser'));
         }
         $this->db->where('flag_active', 1);
         $this->db->order_by('tanggal_order', 'desc');
@@ -14,7 +16,6 @@ class M_pesanan extends CI_Model{
 
     public function getPesananDetail($id, $postatus = 0)
     {    
-
         $this->db->where('flag_active', 1);
         $dataOrder = $this->db->where('id_trx_order_barang', $id)
                                 ->get('trx_order_barang')->row_array(0);
