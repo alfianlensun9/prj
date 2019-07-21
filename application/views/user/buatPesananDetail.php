@@ -48,10 +48,8 @@
                         <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama Barang</th>                    
-                        <th scope="col">Jml Barang</th>           
-                        <?php if ($datapesanan['id_mst_status_order'] == 0): ?>         
-                        <th scope="col">Opsi</th>                    
-                        <?php endif ?>
+                        <th scope="col">Jml Barang</th>                                   
+                        <th scope="col">Opsi</th>                                                                    
                         </tr>
                     </thead>
                     <tbody id="tbody-pesanan">                                                
@@ -66,6 +64,11 @@
                                 <?php if ($datapesanan['id_mst_status_order'] == 0): ?>
                                 <td><button class="btn btn-sm btn-danger" onclick="return hapusDetail('<?= $dt['id_trx_order_barang_detail'] ?>')">Hapus</button></td>                                
                                 <?php endif ?>
+                                <?php if ($dt['flag_produksi'] == 1): ?>
+                                <td>                                    
+                                    <button class="btn btn-sm btn-info" onclick="return lihatProgress('<?= $dt['id_trx_order_barang_detail'] ?>')">Lihat Progress</button>
+                                </td>                                
+                                <?php endif ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -77,6 +80,73 @@
             </div>
             <?php endif ?>
         </div>            
+    </div>
+</div>
+
+<div class="modal fade" id="modalPembayaran" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">Rincian Harga - <span id="mdlNmBrg"></span></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="col-12">                    
+                    <div class="form-row">
+                        <div class="col-12">
+                            <div class="form-row">
+                                <div class="col-3">
+                                    <strong>Jumlah Pesanan</strong>
+                                </div>
+                                <div class="col-6">
+                                    : <span id="djlhpesanan"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-row">
+                                <div class="col-3">
+                                    <strong>Harga Asli</strong>
+                                </div>
+                                <div class="col-6">
+                                    : <span id="dharga_asli"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-row">
+                                <div class="col-3">
+                                    <strong>Pajak</strong>
+                                </div>
+                                <div class="col-6">
+                                    : <span id="dpajak"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-row">
+                                <div class="col-3">
+                                    <strong>Ongkir</strong>
+                                </div>
+                                <div class="col-6">
+                                    : <span id="dongkir"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <?php if ($datapesanan['id_mst_status_order'] == 1):  ?>
+        <div class="modal-footer">                                
+            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Kembali</button>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-simpanRincian">Simpan Rincian</button>
+        </div>
+        </div>
+        <?php endif ?>
     </div>
 </div>
 
@@ -141,6 +211,10 @@
                 console.log(err)
             }
         })
+    }
+
+    lihatProgress = (id) => {
+        $('#content-wrapper').load(base_url+'progress/'+id)
     }
     
 }())

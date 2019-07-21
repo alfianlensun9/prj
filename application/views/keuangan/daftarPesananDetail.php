@@ -28,8 +28,10 @@
                                 <?php if ($dt['flag_create_rincian'] == 0): ?>
                                 <td><button class="btn btn-sm btn-info btnrincian" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Tambah Rincian</button></td>                                
                                 <?php else : ?>
-                                <td><button class="btn btn-sm btn-success btnrinciandetail" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Rincian</button></td>                                
-                                <?php endif ?>
+                                <td>
+                                    <button class="btn btn-sm <?= $dt['flag_produksi'] == 1 ? 'btn-primary' : 'btn-success' ?> btnrinciandetail" data-flagp="<?= $dt['flag_produksi'] ?>" data-flagb="<?= $dt['flag_bayar'] ?>" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Rincian Harga <?= $dt['flag_produksi'] == 1 ? '& Pembayaran' : '' ?></button>
+                                </td>                                                                
+                                <?php endif ?>                                
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -111,8 +113,18 @@
                                     <div class="col-3">
                                         <strong>Ongkir</strong>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6" style="border-bottom : 1px solid #333">
                                         : <span id="dongkir"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-row">
+                                    <div class="col-3">
+                                        <strong>Total</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        : <span id="total"></span>
                                     </div>
                                 </div>
                             </div>
@@ -124,10 +136,10 @@
         <?php if ($datapesanan['id_mst_status_order'] == 1):  ?>
         <div class="modal-footer">                                
             <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Kembali</button>
-            <button type="button" class="btn btn-primary btn-sm" id="btn-simpanRincian">Simpan Rincian</button>
-        </div>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-simpanRincian">Simpan Rincian</button>                        
         </div>
         <?php endif ?>
+        <button type="button" class="btn btn-primary btn-sm" id="btn-bayar" style="display : none">Bayar <i class="fa fa-check"></i></button>
     </div>
 </div>
 
@@ -145,6 +157,10 @@
         let idOrderBarangDetail = $(this).data('idorderbarangdetail')            
         let nmBarang = $(this).data('namabarang')    
         let qtyBarang = $(this).data('qtybrg')        
+        let flagp = $(this).data('flagp')
+        let flagb = $(this).data('flagb')
+        
+        $('#btn-bayar').attr('data-idorderdetail', idOrderBarangDetail)        
         $('#mdlNmBrg').html(nmBarang)
         $.ajax({
             url : base_url+'getRincianDetail',
@@ -153,11 +169,15 @@
                 id : idOrderBarangDetail
             },
             dataType : 'json',
-            success : function (data){                
+            success : function (data){      
+                if (flagp == 1 && flagb == 0){
+                    $('#btn-bayar').show();
+                }          
                 $('#djlhpesanan').html(qtyBarang)
                 $('#dharga_asli').html(data.harga_asli)
                 $('#dongkir').html(data.ongkir)
                 $('#dpajak').html(data.pajak)
+                $('#total').html(parseInt(qtyBarang)*(parseInt(data.harga_asli)+parseInt(data.ongkir)+parseInt(data.pajak)))
             },
             error : function (err){
                 console.log(err)
@@ -165,6 +185,25 @@
         })
 
     })    
+
+    $(document).on('click', '#btn-bayar', function(){
+        let idorderdetail = $(this).data('idorderdetail');
+        $.ajax({
+            url : base_url+'bayar',
+            method : 'post',
+            data : {
+                id : idorderdetail,
+                jumlah_bayar : parseInt($('#total').html())
+            },
+            dataType : 'json',
+            success : (data) => {
+                $('#modalRincian').modal('hide')
+            },
+            error : (err) => {
+                console.log(err)
+            }
+        })
+    })
 
     $(document).on('click', '#btn-simpanRincian', function (){
         createRincian()
@@ -202,7 +241,7 @@
                 console.log(err)
             }
         })
-    }
+    }        
     
     
 }())

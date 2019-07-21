@@ -35,6 +35,11 @@ class C_actions extends CI_Controller{
         echo json_encode($this->pesanan->createMasterJurusan());
     }
 
+    public function createStockBarang()
+    {
+        echo json_encode($this->pesanan->createStockBarang());
+    }
+
     public function createPesanan()
     {
         echo json_encode($this->pesanan->createPesanan());
@@ -50,9 +55,29 @@ class C_actions extends CI_Controller{
         echo json_encode($this->pesanan->createPurcaseOrder($id));
     }
 
+    public function createRincianProduk()
+    {
+        echo json_encode($this->pesanan->createRincianProduk());
+    }
+
+    public function createProgress()
+    {
+        echo json_encode($this->pesanan->createProgress());
+    }
+
     public function konfirmasiPurcaseOrder($id)
     {
         echo json_encode($this->pesanan->konfirmasiPurcaseOrder($id));
+    }
+
+    public function konfirmasiRincianProduk()
+    {
+        echo json_encode($this->pesanan->konfirmasiRincianProduk());
+    }
+
+    public function produksi()
+    {
+        echo json_encode($this->pesanan->produksi());
     }
 
     public function hapusPesanan()
@@ -83,6 +108,11 @@ class C_actions extends CI_Controller{
     public function konfirmasiRincianPesanan()
     {
         echo json_encode($this->pesanan->konfirmasiRincianPesanan());
+    }
+
+    public function bayar()
+    {
+        echo json_encode($this->pesanan->bayar());
     }
 }
 

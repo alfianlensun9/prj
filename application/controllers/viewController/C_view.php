@@ -37,7 +37,7 @@ class C_view extends CI_Controller{
             $this->load->view('user/buatPesanan', $data);
         }
         else
-        if ($this->role == 2){ 
+        if ($this->role == 2 || $this->role == 4){ 
             $this->load->view('admin/pesanan', $data);            
         }
         else
@@ -50,20 +50,20 @@ class C_view extends CI_Controller{
     public function orderBarangDetail($id)
     {
         $data['role'] = $this->role;
-        $getData = $this->pesanan->getPesananDetail($id);                
+        $getData = $this->pesanan->getPesananDetail($id);    
         $data['datapesanan'] = $getData['dataOrder'];
-        $data['datapesanandetail'] = $getData['detailOrder'];  
+        $data['datapesanandetail'] = $getData['detailOrder'];          
         if ($this->role == 1){
             $this->load->view('user/buatPesananDetail', $data);
         }
         else
-        if ($this->role == 2){ 
-            $this->load->view('admin/pesananDetail', $data);            
+        if ($this->role == 2 || $this->role == 4){ 
+            $this->load->view('admin/pesananDetail', $data);
         }
         else
         {
             $this->load->view('keuangan/daftarPesananDetail', $data); 
-        }                              
+        }
     }
 
     public function purcaseOrder($id)
@@ -80,6 +80,28 @@ class C_view extends CI_Controller{
         // $this->load->view('keuangan/daftarPesananDetail', $data); * keu
         $this->load->view('admin/purcaseOrder', $data);
     }
+
+    public function progress($id)
+    {
+        $data['role'] = $this->role;
+        $data['dataprogress'] = $this->pesanan->getProgress($id);        
+        $data['id_trx_order_barang_detail'] = $id;
+        $this->load->view('jurusan/progress', $data);
+    }
+
+    public function rincianProduk($id)
+    {
+        $data['role'] = $this->role;
+        $data['list_barang'] = $this->pesanan->getListMstBarang();       
+        $data['dataOrderBarangdetail'] = $this->pesanan->getDataOrderBarangDetail($id);
+        if ($this->role == 4){
+            $data['dataRincianProduk'] = $this->pesanan->getRincianProdukWithStock($id);            
+        } else {
+            $data['dataRincianProduk'] = $this->pesanan->getRincianProduk($id);
+        }
+        $data['id_trx_order_barang_detail'] = $id;
+        $this->load->view('admin/rincianProduk', $data);
+    }    
 
 
     public function masterBarang()
@@ -105,7 +127,14 @@ class C_view extends CI_Controller{
     {
         echo json_encode($this->pesanan->getRincianDetail());
     }
-    
+
+    public function stockBarang()
+    {        
+        $data['list_barang'] = $this->pesanan->getListMstBarang();        
+        $data['dataStock'] = $this->pesanan->getStockBarang();        
+        $this->load->view('gudang/stockBarang', $data);
+    }
+        
     
 }
 

@@ -36,17 +36,7 @@
             </div>
         </div>
         <?php endif ?>
-        <?php if ($role == 2) :  ?>
-        <div class="col-lg-12 cardSideBar" id="nav-masterbarang">
-            <div class="form-row">
-                <div class="col-lg-2">
-                    <i class="ml-2 fa fa-toolbox"></i>
-                </div>
-                <div class="col-lg-9">
-                    Master Barang
-                </div>
-            </div>
-        </div>
+        <?php if ($role == 2) :  ?>       
         <div class="col-lg-12 cardSideBar" id="nav-masterjurusan">
             <div class="form-row">
                 <div class="col-lg-2">
@@ -68,6 +58,42 @@
             </div>
         </div>
         <?php endif ?>
+        <?php if ($role == 4) :  ?>
+        <div class="col-lg-12 cardSideBar activeSidebar" id="nav-pesananJurusan">
+            <div class="form-row">
+                <div class="col-lg-2">
+                    <i class="ml-2 fa fa-list"></i>
+                </div>
+                <div class="col-lg-9">
+                    Order Produk
+                </div>
+            </div>
+        </div>
+        <?php endif ?>
+        <?php if ($role == 5) :  ?>
+        <div class="col-lg-12 cardSideBar" id="nav-stockbarang">
+            <div class="form-row">
+                <div class="col-lg-2">
+                    <i class="ml-2 fa fa-list"></i>
+                </div>
+                <div class="col-lg-9">
+                    Stock Barang
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 cardSideBar" id="nav-masterbarang">
+            <div class="form-row">
+                <div class="col-lg-2">
+                    <i class="ml-2 fa fa-toolbox"></i>
+                </div>
+                <div class="col-lg-9">
+                    Master Barang
+                </div>
+            </div>
+        </div>       
+        
+        <?php endif ?>
+        
     </div>
 </div>        
 
@@ -83,10 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let pesananuser = document.querySelector('#nav-pesananUser')
     let pesanankeu = document.querySelector('#nav-pesananKeu')
     let pesananadm = document.querySelector('#nav-pesananAdm')
+    let pesananJurusan = document.querySelector('#nav-pesananJurusan')
     let masterbarang = document.querySelector('#nav-masterbarang');        
     let masterjurusan = document.querySelector('#nav-masterjurusan');     
     let otentikasi = document.querySelector('#nav-otentikasi');         
-    
+    let stockbarang = document.querySelector('#nav-stockbarang');
 
     if (pesananuser){
         loadView('orderBarang', 'Pesanan','nav-pesananUser')    
@@ -98,6 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
         loadView('orderBarang', 'Halaman Utama','nav-pesananKeu')    
         pesanankeu.addEventListener('click' , () => {   
             loadView('orderBarang', 'Halaman Utama','nav-pesananKeu')    
+        })    
+    }
+
+    if (pesananJurusan){
+        loadView('orderBarang', 'Halaman Utama','nav-pesananJurusan')    
+        pesananJurusan.addEventListener('click' , () => {   
+            loadView('orderBarang', 'Halaman Utama','nav-pesananJurusan')    
         })    
     }
     
@@ -122,6 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (otentikasi){
         otentikasi.addEventListener('click', () => {
             loadView('otentikasi', 'Otentikasi','nav-otentikasi')
+        })   
+    }
+
+    if (stockbarang){
+        stockbarang.addEventListener('click', () => {
+            loadView('stockBarang', 'Stock Barang','nav-stockbarang')
         })   
     }
         

@@ -17,10 +17,10 @@
                     margin-right : 20%
                 "
             >
-                <strong><?= $this->session->userdata('username') ?></strong>
+                <strong><?= strToUpper($this->session->userdata('username')) ?>&nbsp;&nbsp;&nbsp;&nbsp;</strong>
             </a>            
         </li>
-        <li class="nav-item" style="padding-left : 40">
+        <li class="nav-item">
             <a 
             style="
                     margin-right : 200

@@ -1,6 +1,27 @@
+<style>
+    @media print{
+        #cetak{
+            display : none !important;
+        }
+        .sidebarContainer{
+            display : none !important;
+        }
+        .navbar{
+            display : none !important;
+        }
+        .cop {
+            display : flex !important;
+        }
+    }
+</style>
+
 <div class="form-row">            
     <div class="col-lg-12 ">
-        <div class="form-row">            
+        <div class="form-row">          
+            <div class="col-lg-12 cop" style="display : none; border-bottom : 2px solid #000; padding-bottom : 20px">                                                        
+                <img src="<?= base_url('assets/img/logoput.png') ?>" alt="" width="80" style="float: left">                    
+                <h2 style="margin-left : 100px; margin-top : 25px;">PUSAT UNGGULAN TEKNOLOGI</h2>                
+            </div>
             <div class="col-lg-12 mt-4">
                 <strong>Purcase Order</strong>
                 <?php if (isset($datapurcaseorder) && $datapurcaseorder['flag_status_purcase_order'] == 1): ?>
@@ -145,7 +166,7 @@
                 <?php if ($datapesanan['id_trx_purcase_order'] == null) :?>
                 <button type="button" class="btn btn-sm btn-primary" id="kirimPurcaseOrder">Kirim <i class="fa fa-paper-plane"></i></button>
                 <?php elseif ($datapesanan['id_trx_purcase_order'] != null && isset($datapurcaseorder)) : ?>
-                <button type="button" class="btn btn-sm btn-info" id="cetak">Cetak <i class="fa fa-print"></i></button>
+                <button type="button" class="btn btn-sm btn-info" onclick="return window.print()" id="cetak">Cetak <i class="fa fa-print"></i></button>
                 <?php endif ?>
             </div>
         </div>            

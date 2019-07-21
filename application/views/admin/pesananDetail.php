@@ -28,7 +28,15 @@
                                 <?php if ($dt['flag_create_rincian'] == 0): ?>
                                 <td><button class="btn btn-sm btn-warning btnrincian" >Belum Ada Rincian</button></td>                                
                                 <?php else : ?>
-                                <td><button class="btn btn-sm btn-success btnrinciandetail" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Rincian</button></td>                                
+                                <td>
+                                    <button class="btn btn-sm btn-success btnrinciandetail" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Rincian Harga</button>                                    
+                                    <?php if ($datapesanan['id_trx_purcase_order'] != null) :  ?>
+                                    <button class="btn btn-sm <?= $dt['flag_rincian_produk'] == 1 ? 'btn-info' : 'btn-primary' ?>" onclick="return openRincianProduk('<?= $dt['id_trx_order_barang_detail'] ?> ')"><?= $dt['flag_rincian_produk'] != 1 ? 'Buat Rincian Produk' : 'Lihat Rincian Produk' ?></button>                                    
+                                    <?php endif ?>
+                                    <?php if ($dt['flag_produksi'] == 1): ?>
+                                    <button class="btn btn-sm btn-primary" onclick="return openProgress('<?= $dt['id_trx_order_barang_detail'] ?>')">Perbarui Progress</button>
+                                    <?php endif ?>
+                                </td>                                                                                                
                                 <?php endif ?>
                             </tr>
                         <?php endforeach; ?>
@@ -129,7 +137,7 @@
 <script>
 (function (){    
 
-    $(document).on('click', '.btnrinciandetail', function (){
+    document.querySelector('.btnrinciandetail').addEventListener('click', function (){                
         let idOrderBarangDetail = $(this).data('idorderbarangdetail')            
         let nmBarang = $(this).data('namabarang')    
         let qtyBarang = $(this).data('qtybrg')        
@@ -141,7 +149,8 @@
                 id : idOrderBarangDetail
             },
             dataType : 'json',
-            success : function (data){                
+            success : function (data){         
+                $('#modalRincian').modal('show')
                 $('#djlhpesanan').html(qtyBarang)
                 $('#dharga_asli').html(data.harga_asli)
                 $('#dongkir').html(data.ongkir)
@@ -190,6 +199,14 @@
                 console.log(err)
             }
         })
+    }
+
+    openRincianProduk = (iddetail) => {
+        $('#content-wrapper').load(base_url+'rincianProduk/'+iddetail)                
+    }
+
+    openProgress = (id) => {
+        $('#content-wrapper').load(base_url+'progress/'+id)                
     }
     
     
