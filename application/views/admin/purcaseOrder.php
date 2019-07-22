@@ -152,7 +152,7 @@
                                 <td><?= $dt['harga_asli'] ?></td>                                    
                                 <td><?= $dt['ongkir'] ?></td>                                    
                                 <td><?= $dt['pajak'] ?></td>                                    
-                                <td><?= '-' ?></td>                                    
+                                <td><?= $dt['qty_barang']*($dt['harga_asli']+$dt['ongkir']+$dt['pajak']) ?></td>                                    
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
