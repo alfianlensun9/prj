@@ -11,6 +11,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Barang</th>                    
                         <th scope="col">Jml Barang</th>           
+                        <th scope="col">Keterangan</th>      
                         <?php if ($datapesanan['id_mst_status_order'] == 1): ?>         
                         <th scope="col">Opsi</th>                    
                         <?php endif ?>
@@ -25,6 +26,7 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $dt['nm_trx_order_barang_detail'] ?></td>
                                 <td><?= $dt['qty_barang'] ?></td>
+                                <td><?= $dt['keterangan'] ?></td>
                                 <?php if ($dt['flag_create_rincian'] == 0): ?>
                                 <td><button class="btn btn-sm btn-info btnrincian" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Tambah Rincian</button></td>                                
                                 <?php else : ?>

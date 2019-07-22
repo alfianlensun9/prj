@@ -25,8 +25,18 @@
                             <div class="col-lg-4 mt-2">
                                 <label for="">Jumlah Barang</label>
                             </div>
-                            <div class="form-group col-lg-5 mt-2">                        
+                            <div class="form-group col-lg-8 mt-2">                        
                                 <input type="text" class="form-control form-control-sm" name="qty_barang">
+                            </div>                                                                       
+                        </div>                                            
+                    </div> 
+                    <div class="col-lg-8">                 
+                        <div class="form-row">
+                            <div class="col-lg-4 mt-2">
+                                <label for="">Keterangan</label>
+                            </div>
+                            <div class="form-group col-lg-5 mt-2">                        
+                                <input type="text" class="form-control form-control-sm" name="keterangan">
                             </div> 
                             <div class="col-lg-3"> 
                                 <button type="button" class="btn btn-primary btn-buat-pesanan-detail btn-sm float-right">
@@ -49,6 +59,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Barang</th>                    
                         <th scope="col">Jml Barang</th>                                   
+                        <th scope="col">Keterangan</th>     
                         <th scope="col">Opsi</th>                                                                    
                         </tr>
                     </thead>
@@ -61,6 +72,7 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $dt['nm_trx_order_barang_detail'] ?></td>
                                 <td><?= $dt['qty_barang'] ?></td>
+                                <td><?= $dt['keterangan'] ?></td>
                                 <?php if ($datapesanan['id_mst_status_order'] == 0): ?>
                                 <td><button class="btn btn-sm btn-danger" onclick="return hapusDetail('<?= $dt['id_trx_order_barang_detail'] ?>')">Hapus</button></td>                                
                                 <?php endif ?>
@@ -168,6 +180,7 @@
                             '<td>'+(no++)+'</td>'+
                             '<td>'+item.nm_trx_order_barang_detail+'</td>'+
                             '<td>'+item.qty_barang+'</td>'+
+                            '<td>'+item.keterangan+'</td>'+
                             `<td><button class="btn btn-sm btn-danger" onclick="return hapusDetail('${item.id_trx_order_barang_detail}, ${item.id_trx_order_barang}')">Hapus</button></td>`+
                         '</tr>'
                     );

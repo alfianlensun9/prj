@@ -134,6 +134,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Barang</th>                    
                         <th scope="col">Jml Barang</th>                                       
+                        <th scope="col">Keterangan</th>       
                         <th scope="col">Harga Asli</th>           
                         <th scope="col">Ongkir</th>           
                         <th scope="col">Pajak</th>           
@@ -149,6 +150,7 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $dt['nm_trx_order_barang_detail'] ?></td>
                                 <td><?= $dt['qty_barang'] ?></td>                                    
+                                <td><?= $dt['keterangan'] ?></td>                                    
                                 <td><?= $dt['harga_asli'] ?></td>                                    
                                 <td><?= $dt['ongkir'] ?></td>                                    
                                 <td><?= $dt['pajak'] ?></td>                                    
