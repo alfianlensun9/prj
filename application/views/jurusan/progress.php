@@ -5,7 +5,7 @@
             <div class="col-lg-12 mt-4">
                 <strong>Progress Pesanan</strong>                
             </div>               
-            <?php if ($role == 4): ?>
+            <?php if ($role == 4 && $orderdetail['flag_produksi'] == 0): ?>
             <div class="col-12">
                 <input type="hidden" name="id_trx_order_barang_detail" value="<?= $id_trx_order_barang_detail ?>">
                 <div class="form-row">
@@ -48,7 +48,13 @@
         </form>      
     </div>
 </div>
-
+<div style="position: fixed; bottom: 2%; right : 3%">
+    <?php if ($orderdetail['flag_produksi'] == 1) :  ?>    
+    <button class="btn-sm btn btn-primary" onclick="return progressSelesai('<?= $id_trx_order_barang_detail ?>')">Selesai <i class="fa fa-check"></i></button>
+    <?php else :  ?>
+    <button class="btn-sm btn btn-success" >Telah Selesai <i class="fa fa-check"></i></button>
+    <?php endif ?>
+</div>
 <script>
 (function(){
     addProgress = (id) => {        
@@ -61,6 +67,24 @@
                 $('#content-wrapper').load(base_url+'progress/'+id)
             },
             error : function (err){
+                console.log(err)
+            }
+        })
+    }
+
+    progressSelesai = (id) => {
+        $.ajax({
+            url : base_url+'progressSelesai',
+            method : 'post',
+            dataType : 'json',
+            data : {
+                id : id
+            },
+            success : function(data){
+                $('#content-wrapper').load(base_url+'progress/'+id)
+            },
+            error : function(err)
+            {
                 console.log(err)
             }
         })

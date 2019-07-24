@@ -40,7 +40,7 @@
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $dt['nm_jurusan'] ?></td>
-                            <td><button class="btn btn-sm btn-danger" onclick = "return deleteMasterBarang('<?= $dt['id_mst_jurusan'] ?>')">Hapus</button></td>
+                            <td><button class="btn btn-sm btn-danger" onclick = "return deleteMasterJurusan('<?= $dt['id_mst_jurusan'] ?>')">Hapus</button></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

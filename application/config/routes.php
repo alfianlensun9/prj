@@ -41,4 +41,5 @@ $route['konfirmasiRincianProduk'] = $actControllerUri.'konfirmasiRincianProduk';
 $route['konfirmasiPurcaseOrder/(:any)'] = $actControllerUri.'konfirmasiPurcaseOrder/$1';
 $route['produksi'] = $actControllerUri.'produksi';
 $route['createProgress'] = $actControllerUri.'createProgress';
+$route['progressSelesai'] = $actControllerUri.'progressSelesai';
 $route['bayar'] = $actControllerUri.'bayar';

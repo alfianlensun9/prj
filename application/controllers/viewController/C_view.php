@@ -85,6 +85,7 @@ class C_view extends CI_Controller{
     {
         $data['role'] = $this->role;
         $data['dataprogress'] = $this->pesanan->getProgress($id);        
+        $data['orderdetail'] = $this->pesanan->getPesananDetailById($id);        
         $data['id_trx_order_barang_detail'] = $id;
         $this->load->view('jurusan/progress', $data);
     }

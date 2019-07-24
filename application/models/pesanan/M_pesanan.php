@@ -33,6 +33,12 @@ class M_pesanan extends CI_Model{
         ];
     }
 
+    public function getPesananDetailById($id)
+    {
+        return $this->db->where('id_trx_order_barang_detail', $id)
+                           ->get('trx_order_barang_detail')->row_array(0);
+    }
+
     public function getStockBarang()
     {
         return $this->db->select('*')
@@ -384,7 +390,21 @@ class M_pesanan extends CI_Model{
         ];
     }
 
+    public function progressSelesai()
+    {
+        $this->db->where('id_trx_order_barang_detail', $this->input->post('id'))
+                    ->update('trx_order_barang_detail', [
+                        'flag_produksi' => 2
+                    ]);
 
+        return [
+            'metaData' => [
+                'code' => 200,
+                'message' => 'ok'
+            ],
+            'result' => null
+        ];
+    }
     
 
     

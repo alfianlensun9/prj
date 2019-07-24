@@ -84,6 +84,10 @@
     <div style="position: fixed; bottom: 5%; right : 3%">
         <button class="btn btn-sm btn-primary">Sementara Di Produksi <i class="fa fa-spin fa-spinner"></i></button>
     </div>
+<?php else : ?>
+    <div style="position: fixed; bottom: 5%; right : 3%">
+        <button class="btn btn-sm btn-success">Selesai <i class="fa fa-check"></i></button>
+    </div>
 <?php endif ?>
 <script src="<?= base_url('assets/js/selectize/selectize.js') ?>"></script>
 <script>

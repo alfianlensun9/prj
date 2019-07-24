@@ -35,8 +35,8 @@
                                     <?php if ($datapesanan['id_trx_purcase_order'] != null) :  ?>
                                     <button class="btn btn-sm <?= $dt['flag_rincian_produk'] == 1 ? 'btn-info' : 'btn-primary' ?>" onclick="return openRincianProduk('<?= $dt['id_trx_order_barang_detail'] ?> ')"><?= $dt['flag_rincian_produk'] != 1 ? 'Buat Rincian Produk' : 'Lihat Rincian Produk' ?></button>                                    
                                     <?php endif ?>
-                                    <?php if ($dt['flag_produksi'] == 1): ?>
-                                    <button class="btn btn-sm btn-primary" onclick="return openProgress('<?= $dt['id_trx_order_barang_detail'] ?>')">Perbarui Progress</button>
+                                    <?php if ($dt['flag_produksi'] == 1 || $dt['flag_produksi'] == 2): ?>
+                                    <button class="btn btn-sm btn-primary" onclick="return openProgress('<?= $dt['id_trx_order_barang_detail'] ?>')"><?= $dt['flag_produksi'] == 1 ? 'Perbarui Progress' : 'Lihat Riwayat Progress' ?></button>
                                     <?php endif ?>
                                 </td>                                                                                                
                                 <?php endif ?>

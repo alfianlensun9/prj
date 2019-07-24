@@ -114,6 +114,11 @@ class C_actions extends CI_Controller{
     {
         echo json_encode($this->pesanan->bayar());
     }
+
+    public function progressSelesai()
+    {
+        echo json_encode($this->pesanan->progressSelesai());
+    }
 }
 
 ?>

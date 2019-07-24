@@ -39,7 +39,7 @@
                                 <input type="text" class="form-control form-control-sm" name="keterangan">
                             </div> 
                             <div class="col-lg-3"> 
-                                <button type="button" class="btn btn-primary btn-buat-pesanan-detail btn-sm float-right">
+                                <button type="button" onclick="return buatPesananDetail('<?= $datapesanan['id_trx_order_barang'] ?>')" class="btn btn-primary btn-sm float-right">
                                     Tambah <i class="fa fa-plus"></i>
                                 </button>       
                             </div>                                           
@@ -74,7 +74,7 @@
                                 <td><?= $dt['qty_barang'] ?></td>
                                 <td><?= $dt['keterangan'] ?></td>
                                 <?php if ($datapesanan['id_mst_status_order'] == 0): ?>
-                                <td><button class="btn btn-sm btn-danger" onclick="return hapusDetail('<?= $dt['id_trx_order_barang_detail'] ?>')">Hapus</button></td>                                
+                                <td><button class="btn btn-sm btn-danger" onclick="return hapusDetail('<?= $dt['id_trx_order_barang_detail'] ?>', '<?= $datapesanan['id_trx_order_barang'] ?>')">Hapus</button></td>                                
                                 <?php endif ?>
                                 <?php if ($dt['flag_produksi'] == 1): ?>
                                 <td>                                    
@@ -164,33 +164,21 @@
 
 <script>
 (function (){
-    $(document).on('click', '.btn-buat-pesanan-detail', function(e){
-        e.preventDefault()        
+    buatPesananDetail = (idOrder) => {
         $.ajax({
             url : base_url+'createPesananDetail',
             method : 'post',
             data : $('#formPesananDetail').serialize(),
             dataType : 'json',
             success : (data) => {
-                $('#tbody-pesanan').html('')
-                let no = 1;
-                $.each(data.result, (i, item) => {
-                    $('#tbody-pesanan').append(
-                        '<tr>'+
-                            '<td>'+(no++)+'</td>'+
-                            '<td>'+item.nm_trx_order_barang_detail+'</td>'+
-                            '<td>'+item.qty_barang+'</td>'+
-                            '<td>'+item.keterangan+'</td>'+
-                            `<td><button class="btn btn-sm btn-danger" onclick="return hapusDetail('${item.id_trx_order_barang_detail}, ${item.id_trx_order_barang}')">Hapus</button></td>`+
-                        '</tr>'
-                    );
-                })
+                $('#content-wrapper').load(base_url+'orderBarangDetail/'+idOrder)
             },
             error : (err) => {
                 console.log(err)
             }
         })
-    })
+    }
+    
 
     hapusDetail = (id,idOrder) => {
         $.ajax({
