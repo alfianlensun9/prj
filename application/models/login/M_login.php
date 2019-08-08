@@ -73,6 +73,7 @@ class M_login extends CI_Model{
     {
         $data = [
             'username' => $this->input->post('username'),
+            'no_telp' => $this->input->post('no_telp'),
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
             'id_role_user' => $this->input->post('role')
         ];

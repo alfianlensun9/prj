@@ -12,6 +12,12 @@
         .cop {
             display : flex !important;
         }
+        .table thead, .table tr th, .table tr td{
+            border : 1px solid #000;
+        }
+        .table {
+            color : #000;
+        }
     }
 </style>
 

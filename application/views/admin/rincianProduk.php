@@ -84,7 +84,7 @@
     <div style="position: fixed; bottom: 5%; right : 3%">
         <button class="btn btn-sm btn-primary">Sementara Di Produksi <i class="fa fa-spin fa-spinner"></i></button>
     </div>
-<?php else : ?>
+<?php elseif ($role == 4 && $dataOrderBarangdetail['flag_produksi'] == 2) : ?>
     <div style="position: fixed; bottom: 5%; right : 3%">
         <button class="btn btn-sm btn-success">Selesai <i class="fa fa-check"></i></button>
     </div>

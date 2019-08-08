@@ -245,6 +245,7 @@ class M_pesanan extends CI_Model{
 
     public function createProgress()
     {        
+        
         $this->db->insert('trx_progress_produksi', $this->input->post());
                     
         return [
@@ -309,6 +310,19 @@ class M_pesanan extends CI_Model{
 
     public function produksi()
     {
+        $getProduksi = $this->db->where('id_trx_order_barang_detail', $this->input->post('id'))
+                                ->get('trx_rincian_produk')->result_array();
+        
+        foreach ($getProduksi as $data){
+            $dataBarang = $this->db->where('id_mst_barang', $data['id_mst_barang'])
+                                    ->get('trx_stock_barang')->row_array(0);
+            $this->db->where('id_mst_barang', $data['id_mst_barang'])
+                        ->where('flag_active', 1)
+                        ->update('trx_stock_barang', [
+                            'qty_barang' => $dataBarang['qty_barang'] - $data['qty_barang']
+                        ]);
+        }
+
         $this->db->where('id_trx_order_barang_detail', $this->input->post('id'));
         $this->db->update('trx_order_barang_detail', [
                 'flag_produksi' => 1

@@ -31,7 +31,7 @@
                                 <td><button class="btn btn-sm btn-info btnrincian" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Tambah Rincian</button></td>                                
                                 <?php else : ?>
                                 <td>
-                                    <button class="btn btn-sm <?= $dt['flag_produksi'] == 1 ? 'btn-primary' : 'btn-success' ?> btnrinciandetail" data-flagp="<?= $dt['flag_produksi'] ?>" data-flagb="<?= $dt['flag_bayar'] ?>" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Rincian Harga <?= $dt['flag_produksi'] == 1 ? '& Pembayaran' : '' ?></button>
+                                    <button class="btn btn-sm <?= $dt['flag_produksi'] == 1 ? 'btn-primary' : 'btn-success' ?> btnrinciandetail" data-flagp="<?= $dt['flag_produksi'] ?>" data-flagb="<?= $dt['flag_bayar'] ?>" data-toggle="modal" data-idOrderBarangDetail="<?= $dt['id_trx_order_barang_detail'] ?>" data-qtyBrg="<?= $dt['qty_barang'] ?>" data-namabarang="<?= $dt['nm_trx_order_barang_detail'] ?>" data-target="#modalRincian">Rincian Harga <?= $dt['flag_produksi'] == 1 && $dt['flag_bayar'] == 0 ? '& Pembayaran' : '' ?></button>
                                 </td>                                                                
                                 <?php endif ?>                                
                             </tr>

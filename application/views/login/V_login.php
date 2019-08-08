@@ -42,7 +42,10 @@
                 <div class="col-lg-8 offset-lg-2 mt-4" style="display : none" id="registForm">
                     <form  method="post" id="form-regist">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" name="username" placeholder="Masukan Nama Pengguna / No Telp / NIK">                                                                        
+                        <input type="text" class="form-control form-control-lg" name="username" placeholder="Masukan Nama Pengguna">                                                                        
+                    </div>          
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-lg" name="no_telp" placeholder="No Telp">                                                                        
                     </div>          
                     <div class="form-group">
                         <input type="password" class="form-control form-control-lg" onkeyup="return cekPass()" id="pass" name="password" placeholder="Masukan Password">                        
